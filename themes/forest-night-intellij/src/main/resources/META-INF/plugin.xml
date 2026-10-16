@@ -1,0 +1,19 @@
+<idea-plugin>
+  <id>forest-night-ethereal</id>
+  <name>Forest Night - Ethereal</name>
+  <version>1.0.3</version>
+  <vendor url="https://github.com/ForrestKnight/forest-night-theme">Forest Night port</vendor>
+  <description><![CDATA[
+    A mystical, nature-inspired dark theme blending ethereal magic with moonlit forest ambiance.
+    IntelliJ port of Forrest Knight's <a href="https://github.com/ForrestKnight/forest-night-theme">Forest Night - Ethereal</a>
+    VS Code theme: an Islands UI theme plus a full editor color scheme.
+  ]]></description>
+
+  <!-- 253 = 2025.3, the first release with the Islands Dark parent theme -->
+  <idea-version since-build="253"/>
+  <depends>com.intellij.modules.platform</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <themeProvider id="forest-night-ethereal" path="/themes/forest_night.theme.json"/>
+  </extensions>
+</idea-plugin>
