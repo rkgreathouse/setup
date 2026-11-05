@@ -82,7 +82,8 @@ code-cleanup/
   switches under `python.spacing` / `python.checks` in the style.
 - Codes: `CC000` syntax error (file untouched), `CC001` file length (350 warn,
   400 error), `CC101` absolute import of own package, `CC102` third+ module
-  constant; everything else is a ruff code.
+  constant, `CC103` docstring (`allow_docstrings: true` permits); everything else
+  is a ruff code. A docstring counts as part of its header for spacing.
 
 ## Harness
 
