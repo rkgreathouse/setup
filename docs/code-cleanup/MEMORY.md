@@ -91,6 +91,11 @@ code-cleanup/
   stdlib in `main`; a runtime library would add a dependency to every tool. Shared
   logging *config* (log4j2.xml, Spring logging properties) belongs to the planned
   templates layer, with code-cleanup reporting drift.
+- **Target Python comes from the project**: `requires-python` (then setup.cfg /
+  setup.py `python_requires`) sets ruff's target-version and mypy's python_version
+  (raised to 3.10, mypy 2.4's oldest); the style's py314 applies only when none is
+  declared. Found by running on requests (>=3.8): py314 rewrote `except (A, B):`
+  to the 3.14-only `except A, B:`.
 - **TOML**: taplo 0.9.3 (`--no-auto-config`, options from style.yaml), chosen over
   tombi, which reorders keys by schemastore schemas and warned on unresolved refs.
   Our pass adds a blank line above each `[table]` and its comments.
