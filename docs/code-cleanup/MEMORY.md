@@ -90,7 +90,7 @@ Rule packs: a fixed core plus opt-in packs per project in `.style.yml`
 
 ## Order of work
 
-1. Finish the `python-style` skill. Still open: line length (draft: 100).
+1. ~~Finish the `python-style` skill.~~ Done (line length 88).
 2. Create the `code-cleanup` repo; build core + Python plugin + Harness template
    using the skill.
 3. Java, TypeScript, Kotlin plugins, modelled on the Python one.
