@@ -25,6 +25,8 @@ def move_file(source: Path, destination: Path) -> None:
         shutil.move(source, destination)
 
     except OSError as error:
-        raise ArchiveError(f"could not move {source} to {destination}: {error}") from error
+        raise ArchiveError(
+            f"could not move {source} to {destination}: {error}"
+        ) from error
 
     log.debug("moved %s to %s", source, destination)

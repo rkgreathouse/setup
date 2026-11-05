@@ -24,7 +24,9 @@ def test_missing_file_raises_config_error(tmp_path: Path) -> None:
 
 def test_wrong_type_names_the_key(tmp_path: Path) -> None:
     config = tmp_path / "config.yaml"
-    config.write_text('max_age_days: thirty\narchive_dir: archive\npatterns: ["*.log"]\n')
+    config.write_text(
+        'max_age_days: thirty\narchive_dir: archive\npatterns: ["*.log"]\n'
+    )
 
     with pytest.raises(ConfigError, match="max_age_days"):
         load_settings(config)
