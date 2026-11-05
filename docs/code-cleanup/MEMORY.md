@@ -107,7 +107,9 @@ code-cleanup/
 - Codes are grouped by concept so Java maps onto the same numbers: `CC0xx` file
   (`CC000` syntax, `CC001` length), `CC1xx` modules (`CC101` absolute self-import,
   auto-fixed for `from` imports; `CC102` third+ constant; `CC103` docstring;
-  `CC104` environment read), `CC2xx` logging (`CC201` basicConfig outside entry,
+  `CC104` environment read; `CC105` comprehension with more than one for/if or
+  nested; `CC106` walrus suggestion, a warning, only for x / not x / x is None
+  tests of a value used nowhere else), `CC2xx` logging (`CC201` basicConfig outside entry,
   `CC202` logger name, `CC203` format), `CC3xx` layout under `profile: cli`
   (`CC301` root module, `CC302` untested module, `CC303` entry shape, `CC304`
   errors.py, `CC305` tool imports tool), `CC4xx` config files (`CC401` ignore

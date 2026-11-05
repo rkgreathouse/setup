@@ -73,6 +73,23 @@ errors. In order:
 - Plain functions over data. A class earns its place only when state genuinely
   lives on between calls.
 
+## Comprehensions and the walrus
+
+- Build a list, set or dict with a comprehension rather than a loop that only
+  appends: `names = [user.name for user in users if user.is_admin]`.
+- Keep it to one `for` and at most one `if`, with no comprehension inside another.
+  Anything bigger is a loop, or a helper the comprehension calls:
+  `[space_comments(block) for block in blocks]`.
+- Use the walrus when a value is only needed to test it and act on it:
+
+  ```python
+  if (failure := find_failure(result)) is not None:
+      return {root: [failure_finding(failure)]}
+  ```
+
+  A value used again later keeps its own assignment line, and a named condition
+  (`is_own_line = ...` then `if is_comment and is_own_line:`) stays named.
+
 ## Spacing
 
 A blank line separates each block from its neighbours:
