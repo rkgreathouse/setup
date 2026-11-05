@@ -1,0 +1,5 @@
+max_age_days: 30
+archive_dir: archive
+patterns:
+  - "*.log"
+  - "*.log.*"
