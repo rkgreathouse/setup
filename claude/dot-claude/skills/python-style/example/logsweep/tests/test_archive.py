@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from logsweep.archive import archive_files
+from ..archive import archive_files
 
 
 def test_moves_files_keeping_their_relative_path(tmp_path: Path) -> None:

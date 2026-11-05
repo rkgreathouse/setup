@@ -83,13 +83,14 @@ Rule packs: a fixed core plus opt-in packs per project in `.style.yml`
   comma); style beyond that is lint rules or our own checks.
 - `add_subparsers` is a warning in our checker, not a failure: whether two jobs
   are distinct is a judgement call.
+- Relative imports inside a package are the house rule, but ruff can only ban
+  them (`TID252`), never require them. The example turns `TID252` off; requiring
+  relative imports within a package is a custom check for code-cleanup.
 - Python 3.14 is the latest stable release (3.15 still in beta as of 2026-11).
 
 ## Order of work
 
-1. Finish the `python-style` skill. Still open: absolute vs relative imports
-   inside a package, how flags / environment variables / `config.yaml` override
-   each other, log message format, line length (draft: 100) and quote style.
+1. Finish the `python-style` skill. Still open: line length (draft: 100).
 2. Create the `code-cleanup` repo; build core + Python plugin + Harness template
    using the skill.
 3. Java, TypeScript, Kotlin plugins, modelled on the Python one.

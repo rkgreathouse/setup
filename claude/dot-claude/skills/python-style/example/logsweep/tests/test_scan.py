@@ -2,8 +2,8 @@ import os
 import time
 from pathlib import Path
 
-from logsweep.scan import find_stale_files
-from logsweep.settings import Settings
+from ..scan import find_stale_files
+from ..settings import Settings
 
 
 def make_settings() -> Settings:

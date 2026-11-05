@@ -40,6 +40,13 @@ logsweep/
   so any tool can be lifted into its own repo. Distinct jobs become separate
   tools, each with its own parser, rather than argparse subcommands.
 
+## Imports
+
+- Inside a package, import relatively: `from .scan import find_stale_files`;
+  tests reach up one level, `from ..scan import find_stale_files`.
+- Across packages (a tool importing `utils`), and for stdlib and third-party
+  code, import absolutely.
+
 ## Entry module (`__main__.py`)
 
 The entry module is the only place that parses arguments, prints, and catches
@@ -97,6 +104,10 @@ the blank line before a comment that opens a block (see `example/logsweep/scan.p
   UPPER_CASE constants that are true facts (`SECONDS_PER_DAY`).
 - Anything tunable, and any third constant, goes in `config.yaml`, loaded once
   into a frozen `Settings`.
+- Two sources, each with its own job: flags choose how this run behaves
+  (`--dry-run`, `--verbose`, `--config`); `config.yaml` holds the tunable values.
+  Environment variables are left unread, so a run is fully described by its
+  command line and its config file.
 - State passes through parameters; module-level variables stay constant.
 
 ## Errors
@@ -110,7 +121,12 @@ the blank line before a comment that opens a block (see `example/logsweep/scan.p
 ## Output
 
 - Results go to stdout through `print`, and only from the entry module.
-- Diagnostics go to stderr through `logging`, configured once in `main`.
+- Diagnostics go to stderr through `logging`, configured once in `main` with
+  `%(asctime)s %(levelname)s %(name)s: %(message)s` and
+  `datefmt="%Y-%m-%d %H:%M:%S"`, giving
+  `2026-11-05 14:02:11 ERROR logsweep.settings: config not found: nope.yaml`.
+- The entry module logs as `logging.getLogger("<tool>")`; every other module
+  uses `logging.getLogger(__name__)`.
 - Exit codes: `0` success, `1` failure, `2` bad usage (argparse's own).
 
 ## Comments

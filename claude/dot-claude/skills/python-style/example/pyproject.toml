@@ -18,6 +18,7 @@ select = [
     "E", "W", "F", "I", "N", "UP", "B", "SIM", "PTH", "RET",
     "ANN", "T20", "TID", "C90", "ERA", "PLW0603", "PLR1702",
 ]
+ignore = ["TID252"]
 
 [tool.ruff.lint.mccabe]
 max-complexity = 10

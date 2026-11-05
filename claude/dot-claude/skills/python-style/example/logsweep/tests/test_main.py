@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from logsweep.__main__ import main
+from ..__main__ import main
 
 
 def write_config(path: Path) -> Path:
