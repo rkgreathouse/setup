@@ -3,7 +3,7 @@ from pathlib import Path
 
 import yaml
 
-from logsweep.errors import ConfigError
+from .errors import ConfigError
 
 
 @dataclass(frozen=True, slots=True)

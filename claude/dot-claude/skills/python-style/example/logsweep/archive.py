@@ -2,7 +2,7 @@ import logging
 import shutil
 from pathlib import Path
 
-from logsweep.errors import ArchiveError
+from .errors import ArchiveError
 
 log = logging.getLogger(__name__)
 

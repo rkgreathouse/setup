@@ -5,10 +5,10 @@ from collections.abc import Sequence
 from dataclasses import dataclass
 from pathlib import Path
 
-from logsweep.archive import archive_files
-from logsweep.errors import ToolError
-from logsweep.scan import find_stale_files
-from logsweep.settings import Settings, load_settings
+from .archive import archive_files
+from .errors import ToolError
+from .scan import find_stale_files
+from .settings import Settings, load_settings
 
 log = logging.getLogger("logsweep")
 
@@ -56,7 +56,13 @@ def parse_args(argv: Sequence[str] | None) -> Options:
 
 def configure_logging(verbose: bool) -> None:
     level = logging.DEBUG if verbose else logging.INFO
-    logging.basicConfig(level=level, stream=sys.stderr, format="%(levelname)s %(message)s")
+
+    logging.basicConfig(
+        level=level,
+        stream=sys.stderr,
+        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+    )
 
 
 def sweep(stale_files: list[Path], options: Options, settings: Settings) -> None:

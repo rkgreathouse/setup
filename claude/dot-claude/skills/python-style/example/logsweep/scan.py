@@ -1,7 +1,7 @@
 import time
 from pathlib import Path
 
-from logsweep.settings import Settings
+from .settings import Settings
 
 SECONDS_PER_DAY = 86_400
 

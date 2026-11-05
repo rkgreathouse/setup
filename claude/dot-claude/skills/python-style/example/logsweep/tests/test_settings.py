@@ -2,8 +2,8 @@ from pathlib import Path
 
 import pytest
 
-from logsweep.errors import ConfigError
-from logsweep.settings import Settings, load_settings
+from ..errors import ConfigError
+from ..settings import Settings, load_settings
 
 
 def test_loads_valid_config(tmp_path: Path) -> None:
