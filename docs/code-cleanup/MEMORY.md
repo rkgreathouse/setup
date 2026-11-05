@@ -34,7 +34,8 @@ code-cleanup --check --report junit > report.xml # Harness Tests tab (also text,
 code-cleanup --config FILE                       # default ROOT/.code-cleanup.yaml
 ```
 
-- **No `--language` flag.** `router.py` maps each file to a plugin by suffix;
+- **No `--language` flag.** `router.py` maps each file to a plugin by suffix or
+  exact file name (`.gitignore`);
   files no plugin claims are skipped. Discovery uses `git ls-files` (so `.gitignore`
   holds) and falls back to walking the tree outside a work tree; `exclude` folder
   names apply either way.
@@ -66,12 +67,35 @@ code-cleanup/
     ├── settings.py         style.yaml + project .code-cleanup.yaml → frozen Settings
     ├── style.yaml          the house style spec, shipped in the wheel
     ├── discover.py         git ls-files / walk, minus exclude
-    ├── router.py           suffix → Language(name, suffixes, clean)
-    ├── engine.py           read, clean, write (fix mode), file-length check
+    ├── router.py           suffix/name → Language(clean, check_project)
+    ├── engine.py           clean each file, then each language's project pass
     ├── report.py           text / json / junit, exit decision
-    ├── python/             ruff.py, spacing.py, checks.py, clean.py
-    └── tests/              test_<module>.py, test_python_<module>.py
+    ├── tools.py            pinned binary lookup (venv scripts dir, then PATH)
+    ├── python/             ruff, spacing, imports, checks, logs, mypy, layout, clean
+    ├── toml/               taplo, spacing, clean
+    ├── ignore/             clean (.gitignore, .dockerignore)
+    └── tests/              test_<module>.py, test_<subpackage>_<module>.py
 ```
+
+- **The flow** (decided with the user): ruff (fix, format) → our fixes (spacing,
+  relative imports) → checks: ruff lint, then mypy --strict, then our `CC` rules.
+  A plugin has a per-file `clean` and an optional whole-project `check_project`.
+- **mypy** is a pinned runtime dependency, run once per root on a temp copy of the
+  cleaned files (line numbers match, no cache in the project), using ROOT/.venv for
+  third-party packages. Exit 2, or exit 1 with no JSON report (mypy missing), is one
+  `mypy` finding: a clean install once passed silently without it.
+- **Profiles**: `profile: none` (default, file rules only) or `cli` (python-style
+  layout, `CC3xx`). `service` is planned with Java: JSON logs, REST layout. The
+  logging format is a setting so a profile can swap it.
+- **Logging is checked, not shipped as a package.** Python setup is ten lines of
+  stdlib in `main`; a runtime library would add a dependency to every tool. Shared
+  logging *config* (log4j2.xml, Spring logging properties) belongs to the planned
+  templates layer, with code-cleanup reporting drift.
+- **TOML**: taplo 0.9.3 (`--no-auto-config`, options from style.yaml), chosen over
+  tombi, which reorders keys by schemastore schemas and warned on unresolved refs.
+  Our pass adds a blank line above each `[table]` and its comments.
+- **Ignore files**: sort within a block and drop repeats only where no `!` negation
+  makes order matter, so the ignored set never changes.
 
 - The style ships inside the package, not as a root `config.yaml` (a deviation from
   the skill's layout): a published tool's defaults must be in the wheel, and
@@ -80,10 +104,14 @@ code-cleanup/
   `.style.yml` rule-pack idea for now.
 - Custom rules (e.g. the blank line above a comment that opens an `if`) are
   switches under `python.spacing` / `python.checks` in the style.
-- Codes: `CC000` syntax error (file untouched), `CC001` file length (350 warn,
-  400 error), `CC101` absolute import of own package, `CC102` third+ module
-  constant, `CC103` docstring (`allow_docstrings: true` permits); everything else
-  is a ruff code. A docstring counts as part of its header for spacing.
+- Codes are grouped by concept so Java maps onto the same numbers: `CC0xx` file
+  (`CC000` syntax, `CC001` length), `CC1xx` modules (`CC101` absolute self-import,
+  auto-fixed for `from` imports; `CC102` third+ constant; `CC103` docstring;
+  `CC104` environment read), `CC2xx` logging (`CC201` basicConfig outside entry,
+  `CC202` logger name, `CC203` format), `CC3xx` layout under `profile: cli`
+  (`CC301` root module, `CC302` untested module, `CC303` entry shape, `CC304`
+  errors.py, `CC305` tool imports tool), `CC4xx` config files (`CC401` ignore
+  block without header). Plus `mypy:<code>` and ruff codes.
 
 ## Harness
 
@@ -133,11 +161,11 @@ code-cleanup/
 
 1. ~~Finish the `python-style` skill.~~ Done (line length 88).
 2. ~~Core + Python plugin.~~ Done (v0.1.0).
-3. Publish to PyPI (trusted publishing from a release workflow), container image,
-   Harness step group template.
-4. Python: mypy --strict and pytest as optional check steps; auto-fix CC101.
+3. ~~Python round two~~: mypy in the flow, profiles + layout, logging rules, env
+   check, CC101 auto-fix, TOML and ignore-file plugins. Done.
+4. Publish to PyPI (trusted publishing from a release workflow), container image,
+   Harness step group template; file-list arguments for pre-commit; parallel runs.
 5. Java, TypeScript, Kotlin plugins, modelled on the Python one; each takes its
    spacing and decomposition rules from the Python style.
-6. Non-code files: Spring `application.yml`/`.properties`, log4j2 config,
-   `.gitignore` with comment blocks; then project-structure rules (e.g. REST API
+6. Non-code files: Spring `application.yml`/`.properties`, log4j2 config; then project-structure rules (e.g. REST API
    layout) for a broader "one style" skill that also writes the CI check.
