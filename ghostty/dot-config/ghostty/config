@@ -1,9 +1,29 @@
-# Ghostty configuration
-# Plain settings only. Nothing here launches tmux or references any repo.
+command = /opt/homebrew/bin/nu
 
-theme = Catppuccin Mocha
-font-size = 13
-window-padding-x = 4
-window-padding-y = 4
-macos-option-as-alt = true
+theme = "Glacier Night Vivid"
+
+font-family = "JetBrainsMono NFM Regular"
+
+font-size = 20
+
 mouse-hide-while-typing = true
+
+mouse-scroll-multiplier = 2
+
+window-decoration = true
+
+window-padding-x = 10
+
+window-padding-y = 10
+
+window-colorspace = "display-p3"
+
+window-padding-balance = true
+
+window-save-state = always
+
+cursor-style = block
+
+adjust-cell-height = 35%
+
+macos-option-as-alt = true

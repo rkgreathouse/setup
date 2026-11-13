@@ -25,4 +25,4 @@ $env.config.buffer_editor = "vim"
 # Homebrew is not on PATH for nu: brew shellenv runs from zsh's .zprofile,
 # which nu never reads. Add it here so brew binaries (pi, ghostty, uv...) resolve.
 use std/util "path add"
-path add "/opt/homebrew/bin" "/opt/homebrew/sbin"
+path add "/usr/local/bin" "/opt/homebrew/bin" "/opt/homebrew/sbin" ($env.HOME | path join ".local/bin")

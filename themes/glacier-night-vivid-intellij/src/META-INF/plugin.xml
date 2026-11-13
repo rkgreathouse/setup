@@ -1,0 +1,12 @@
+<idea-plugin>
+  <id>local.glacier-night-vivid.theme</id>
+  <name>Glacier Night Vivid Theme</name>
+  <version>1.0.0</version>
+  <vendor>local</vendor>
+  <description>Glacier Night Vivid: slate night with glacier blue, orange, teal, pink and tan.</description>
+  <idea-version since-build="253"/>
+  <depends>com.intellij.modules.platform</depends>
+  <extensions defaultExtensionNs="com.intellij">
+    <themeProvider id="glacier-night-vivid" path="/themes/GlacierNightVivid.theme.json"/>
+  </extensions>
+</idea-plugin>

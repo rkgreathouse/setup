@@ -11,3 +11,6 @@ cp -R dot-claude/. ~/.claude/
 
 - `skills/python-style`: house style for Python scripts and CLI tools, with a
   complete example project in `example/`.
+- `themes/glacier-night-vivid.json`: the Glacier Night Vivid theme. Select it
+  with `"theme": "custom:glacier-night-vivid"` in `~/.claude/settings.json`;
+  `setup.sh` installs it and sets that key.

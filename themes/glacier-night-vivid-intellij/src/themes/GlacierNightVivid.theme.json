@@ -1,0 +1,65 @@
+{
+  "name": "Glacier Night Vivid",
+  "dark": true,
+  "author": "",
+  "parentTheme": "Islands Dark",
+  "editorScheme": "/themes/GlacierNightVivid.xml",
+  "colors": {
+    "gray-10": "#1a1e2c",
+    "gray-20": "#242a3b",
+    "gray-30": "#2c354c",
+    "gray-40": "#34405e",
+    "gray-50": "#465169",
+    "gray-60": "#586274",
+    "gray-70": "#6c7687",
+    "gray-80": "#80899a",
+    "gray-90": "#949cad",
+    "gray-100": "#a8b0c0",
+    "gray-110": "#b9c1d0",
+    "gray-120": "#cad1df",
+    "gray-130": "#dbe2ef",
+    "gray-140": "#e3e9f2",
+    "gray-150": "#ecf0f6",
+    "gray-160": "#f4f7f9",
+    "blue-10": "#111a26",
+    "blue-20": "#182532",
+    "blue-30": "#1e303f",
+    "blue-40": "#253a4c",
+    "blue-50": "#2c4558",
+    "blue-60": "#325371",
+    "blue-70": "#37628a",
+    "blue-80": "#3d70a3",
+    "blue-90": "#669acc",
+    "blue-100": "#8ec5f5",
+    "blue-110": "#9fcef6",
+    "blue-120": "#afd6f7",
+    "blue-130": "#c0def8",
+    "blue-140": "#d1e7fa",
+    "blue-150": "#e1f0fb",
+    "blue-160": "#f2f8fc",
+    "editor-text": "#dbe2ef",
+    "text-link": "#8ec5f5",
+    "search-match-bg": "#946945",
+    "tab-file-color-mask-bg": "#1a1e2c80",
+    "popup-completion-match-text": "#f7884a"
+  },
+  "ui": {
+    "EditorTabs": {
+      "underlinedBorderColor": "#f7884a"
+    },
+    "FileColor": {
+      "Yellow": "#2a2a32",
+      "Green": "#243037",
+      "Orange": "#30292f",
+      "Rose": "#2f2636",
+      "Violet": "#282940",
+      "Blue": "#262f40",
+      "Gray": "#242a3b"
+    },
+    "ProgressBar": {
+      "progressColor": "#8ec5f5",
+      "indeterminateStartColor": "#3fd3c4",
+      "indeterminateEndColor": "#8ec5f5"
+    }
+  }
+}
