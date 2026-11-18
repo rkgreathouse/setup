@@ -15,8 +15,28 @@ line-length = 88
 preview = true
 explicit-preview-rules = true
 select = [
-    "E", "W", "F", "I", "N", "UP", "B", "SIM", "PTH", "RET",
-    "ANN", "T20", "TID", "C90", "ERA", "PLW0603", "PLR1702",
+    "E",
+    "W",
+    "F",
+    "I",
+    "N",
+    "UP",
+    "B",
+    "SIM",
+    "PTH",
+    "RET",
+    "ANN",
+    "T20",
+    "TID",
+    "C90",
+    "ERA",
+    "G",
+    "LOG",
+    "C4",
+    "PERF401",
+    "PERF403",
+    "PLW0603",
+    "PLR1702",
 ]
 ignore = ["TID252"]
 
